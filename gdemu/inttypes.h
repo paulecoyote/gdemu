@@ -34,7 +34,7 @@
 #ifndef __INTTYPES_H_
 #define __INTTYPES_H_
 
-#include <stdint.h>
+// #include <stdint.h>
 
 /** \file */
 /** \defgroup avr_inttypes <inttypes.h>: Integer Type conversions
