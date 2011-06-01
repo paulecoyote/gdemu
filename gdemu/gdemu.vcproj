@@ -257,6 +257,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\inttypes.h"
+				>
+			</File>
+			<File
 				RelativePath=".\avr\pgmspace.h"
 				>
 			</File>
@@ -290,10 +294,6 @@
 			>
 			<File
 				RelativePath=".\binary.h"
-				>
-			</File>
-			<File
-				RelativePath=".\inttypes.h"
 				>
 			</File>
 			<File
