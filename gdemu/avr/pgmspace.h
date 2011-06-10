@@ -34,6 +34,7 @@
 
 #define PROGMEM
 #define pgm_read_byte_near *
+#define pgm_read_byte *
 inline unsigned short pgm_read_word_near(void *ptr) { return *((short *)ptr); }
 typedef signed char prog_char;
 typedef unsigned char prog_uchar;
