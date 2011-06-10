@@ -46,6 +46,8 @@ typedef signed __int64 int64_t;
 #else
 #include <stdint.h>
 #endif
+typedef uint8_t prog_uint8_t;
+typedef uint16_t prog_uint16_t;
 
 #endif /* #ifndef INTTYPES_H */
 

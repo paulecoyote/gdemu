@@ -38,6 +38,10 @@
 #include "WString.h"
 #include "DummySerial.h"
 
+// Defines
+#define and &&
+#define or ||
+
 // Functions
 int32_t random(int32_t);
 int32_t random(int32_t, int32_t);
