@@ -97,6 +97,7 @@ void GameduinoSPIClass::begin()
 	GDEMU::s_SampleL2[D_GDEMU_SAMPLEBUFFER] = 0;
 	GDEMU::s_SampleR1[D_GDEMU_SAMPLEBUFFER] = 0;
 	GDEMU::s_SampleR2[D_GDEMU_SAMPLEBUFFER] = 0;
+	((short *)(void *)&GDEMU::s_GdRam[0x800a])[0] = 8000; // FREQHZ
 }
 
 void GameduinoSPIClass::end()
@@ -290,6 +291,9 @@ short GameduinoSPIClass::readRam16(int offset)
 		return (rand() & 0xFF) | ((rand() & 0xFF) << 8);
 	case 0x800e: // P2_V
 		return digitalRead(2);
+	case 0x800c: // FREQTICK
+		short freqhz = ((short *)(void *)&s_GdRam[0x800a])[0];
+		return (short)(System.getMicros() * freqhz / 10000000); // todo: be able to sync with sound samples :)
 	}
 
 	short result = ((short *)(void *)&s_GdRam[offset])[0];
