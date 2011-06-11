@@ -53,21 +53,22 @@ namespace GDEMU {
 
 EmulatorClass Emulator;
 
-void EmulatorClass::run(void (*setup)(), void (*loop)(), bool keyboard)
+void EmulatorClass::run(void (*setup)(), void (*loop)(), int flags)
 {
 	System.begin();
 	GameduinoSPI.begin();
 	GraphicsDriver.begin();
-	AudioDriver.begin();
-	J1.begin();
-	if (keyboard)
-		Keyboard.begin();
+	if (flags & EmulatorEnableAudio) AudioDriver.begin();
+	if (flags & EmulatorEnableJ1) J1.begin();
+	if (flags & EmulatorEnableKeyboard) Keyboard.begin();
 
 	#pragma omp parallel num_threads(3)
 	{
 		// graphics
 		#pragma omp master 
 		{
+			System.makeMainThread();
+
 			unsigned long taskId = 0;
 			void *taskHandle;
 			taskHandle = System.setThreadGamesCategory(&taskId);
@@ -156,12 +157,13 @@ void EmulatorClass::run(void (*setup)(), void (*loop)(), bool keyboard)
 		// arduino
 		if (omp_get_thread_num() == 1)
 		{
+			System.makeDuinoThread();
+			
 			unsigned long taskId = 0;
 			void *taskHandle;
 			taskHandle = System.setThreadGamesCategory(&taskId);
 			System.disableAutomaticPriorityBoost();
 			System.makeNormalPriorityThread();
-			System.makeDuinoThread();
 			setup();
 			for (;;) 
 			{
@@ -181,18 +183,16 @@ void EmulatorClass::run(void (*setup)(), void (*loop)(), bool keyboard)
 			for (;;)
 			{
 				AudioMachine.process();
-				if (keyboard)
-					Keyboard.update();
+				if (flags & EmulatorEnableKeyboard) Keyboard.update();
 				System.delay(10);
 			}
 			System.revertThreadCategory(taskHandle);
 		}
 	}
 	
-	if (keyboard)
-		Keyboard.end();
-	J1.end();
-	AudioDriver.end();
+	if (flags & EmulatorEnableKeyboard) Keyboard.end();
+	if (flags & EmulatorEnableJ1) J1.end();
+	if (flags & EmulatorEnableAudio) AudioDriver.end();
 	GraphicsDriver.end();
 	GameduinoSPI.end();
 	System.end();

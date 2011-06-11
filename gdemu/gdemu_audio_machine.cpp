@@ -74,12 +74,14 @@ void AudioMachineClass::process()
 			if (s_SecondsPassedFor8000 >= s_SecondsPerSample8000)
 			{
 				s_SecondsPassedFor8000 -= s_SecondsPerSample8000;
-				unsigned short sampleL = GameduinoSPI.getNextSampleL();
+				/*unsigned short sampleL = GameduinoSPI.getNextSampleL();
 				unsigned short sampleR = GameduinoSPI.getNextSampleR();
 				if (sampleL == 0) sampleL = 0x8000; // because!
 				if (sampleR == 0) sampleR = 0x8000;
 				s_SampleL = (short)((int)sampleL - 0x8000);
-				s_SampleR = (short)((int)sampleR - 0x8000);
+				s_SampleR = (short)((int)sampleR - 0x8000);*/
+				s_SampleL = GameduinoSPI.getNextSampleL();
+				s_SampleR = GameduinoSPI.getNextSampleR();
 			}
 			audioBuffer[s * 2] = s_SampleL;
 			audioBuffer[(s * 2) + 1] = s_SampleR;

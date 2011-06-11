@@ -36,6 +36,25 @@
 
 namespace GDEMU {
 
+enum EmulatorFlags
+{
+	// enables the keyboard to be used as input
+	EmulatorEnableKeyboard = 0x01, 
+	// enables audio
+	EmulatorEnableAudio = 0x02, 
+	// enables j1
+	EmulatorEnableJ1 = 0x04, 
+
+	// causes J1 to run on the main graphics thread
+	EmulatorSyncJ1GraphicsYLine = 0x10, 	
+	// causes J1 to run on the audio thread
+	EmulatorSyncJ1AudioSample = 0x20, 
+	// combination of the two flags above, causes audio to sync with the graphics thread
+	
+	// links the FREQTICK register to audio sample playback, otherwise by system timer
+	EmulatorFreqTickByAudioSample = 0x40, 
+};
+
 /**
  * EmulatorClass
  * \brief EmulatorClass
@@ -47,8 +66,8 @@ class EmulatorClass
 public:
 	EmulatorClass() { }
 
-	static void run(void (*setup)(), void (*loop)(), bool keyboard);
-
+	static void run(void (*setup)(), void (*loop)(), int flags);
+	
 private:
 	EmulatorClass(const EmulatorClass &);
 	EmulatorClass &operator=(const EmulatorClass &);

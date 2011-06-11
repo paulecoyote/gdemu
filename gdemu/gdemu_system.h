@@ -56,6 +56,7 @@ public:
 	static double getSeconds();
 	static long getMillis();
 	static long getMicros();
+	static long getFreqTick(int hz);
 	
 	static void delay(int ms);
 	static void delayMicros(int us);
@@ -67,6 +68,11 @@ public:
 	static void makeHighPriorityThread();
 	static void makeHighestPriorityThread();
 	static void makeRealtimePriorityThread();
+
+	static void makeMainThread();
+	static bool isMainThread();
+	static inline bool setMainThreadSwitchable(bool value) { s_MainThreadSwitchable = value; }
+	static inline bool isMainThreadSwitchable() { return s_MainThreadSwitchable; }
 	
 	static void makeDuinoThread();
 	static bool isDuinoThread();
@@ -101,6 +107,7 @@ private:
 	static double s_FrameTime, s_FrameTimeDelta;
 	static int s_FrameCount;
 	static double s_FPSSmooth;
+	static bool s_MainThreadSwitchable;
 
 private:
 	SystemClass(const SystemClass &);

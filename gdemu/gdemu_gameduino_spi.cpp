@@ -139,9 +139,9 @@ void GameduinoSPIClass::slaveSelectChanged(uint8_t val)
 	s_LastSS = val;
 }
 
-unsigned short GameduinoSPIClass::getNextSampleL()
+short GameduinoSPIClass::getNextSampleL()
 {
-	short result = ((unsigned short)s_SampleL2[s_SampleLR]) << 8 | ((unsigned short)s_SampleL1[s_SampleLR] & 0xFF);
+	short result = (((short)s_SampleL2[s_SampleLR]) << 8) | (((short)s_SampleL1[s_SampleLR]) & 0xFF);
 
 	int nextL = (s_SampleLR + 1) % D_GDEMU_SAMPLEBUFFER;
 	if (nextL != s_SampleLW)
@@ -152,9 +152,9 @@ unsigned short GameduinoSPIClass::getNextSampleL()
 	return result;
 }
 
-unsigned short GameduinoSPIClass::getNextSampleR()
+short GameduinoSPIClass::getNextSampleR()
 {
-	short result = ((unsigned short)s_SampleR2[s_SampleRR]) << 8 | ((unsigned short)s_SampleR1[s_SampleRR] & 0xFF);
+	short result = (((short)s_SampleR2[s_SampleRR]) << 8) | (((short)s_SampleR1[s_SampleRR]) & 0xFF);
 
 	int nextR = (s_SampleRR + 1) % D_GDEMU_SAMPLEBUFFER;
 	if (nextR != s_SampleRW)
@@ -293,7 +293,7 @@ short GameduinoSPIClass::readRam16(int offset)
 		return digitalRead(2);
 	case 0x800c: // FREQTICK
 		short freqhz = ((short *)(void *)&s_GdRam[0x800a])[0];
-		return (short)(System.getMicros() * freqhz / 10000000); // todo: be able to sync with sound samples :)
+		return (short)(System.getFreqTick(freqhz) & 0xFF); // todo: be able to sync with sound samples :)
 	}
 
 	short result = ((short *)(void *)&s_GdRam[offset])[0];

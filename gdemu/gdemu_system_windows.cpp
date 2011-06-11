@@ -58,6 +58,7 @@ static LARGE_INTEGER s_PerformanceCounterBegin = { 0 };
 
 //static HANDLE s_J1Thread = NULL;
 static HANDLE s_DuinoThread = NULL;
+static HANDLE s_MainThread = NULL;
 
 //static CRITICAL_SECTION s_CriticalSection;
 
@@ -117,6 +118,33 @@ void SystemClass::makeRealtimePriorityThread()
 	SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_TIME_CRITICAL);
 }
 
+void SystemClass::makeMainThread()
+{
+	if (!DuplicateHandle(
+		GetCurrentProcess(),
+		GetCurrentThread(),
+		GetCurrentProcess(),
+		&s_MainThread,
+		0,
+		TRUE,
+		DUPLICATE_SAME_ACCESS))
+		SystemWindows.ErrorWin32();
+}
+
+bool SystemClass::isMainThread()
+{
+	HANDLE currentThread;
+	if (!DuplicateHandle(
+		GetCurrentProcess(),
+		GetCurrentThread(),
+		GetCurrentProcess(),
+		&currentThread,
+		0,
+		TRUE,
+		DUPLICATE_SAME_ACCESS))
+		SystemWindows.ErrorWin32();
+	return currentThread == s_MainThread;
+}
 
 // Duino thread control
 void SystemClass::makeDuinoThread()
@@ -221,7 +249,7 @@ long SystemClass::getMillis()
 	LARGE_INTEGER c;
 	QueryPerformanceCounter(&c);
 	c.QuadPart -= s_PerformanceCounterBegin.QuadPart;
-	c.QuadPart *= 1000;
+	c.QuadPart *= (LONGLONG)1000;
 	c.QuadPart /= s_PerformanceFrequency.QuadPart;
 	return c.QuadPart;
 }
@@ -231,11 +259,20 @@ long SystemClass::getMicros()
 	LARGE_INTEGER c;
 	QueryPerformanceCounter(&c);
 	c.QuadPart -= s_PerformanceCounterBegin.QuadPart;
-	c.QuadPart *= 1000000;
+	c.QuadPart *= (LONGLONG)1000000;
 	c.QuadPart /= s_PerformanceFrequency.QuadPart;
 	return c.QuadPart;
 }
 
+long SystemClass::getFreqTick(int hz)
+{
+	LARGE_INTEGER c;
+	QueryPerformanceCounter(&c);
+	c.QuadPart -= s_PerformanceCounterBegin.QuadPart;
+	c.QuadPart *= (LONGLONG)hz;
+	c.QuadPart /= s_PerformanceFrequency.QuadPart;
+	return c.QuadPart;
+}
 
 void SystemClass::delay(int ms)
 {

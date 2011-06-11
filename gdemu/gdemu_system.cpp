@@ -44,6 +44,7 @@ namespace GDEMU {
 double SystemClass::s_FrameTime, SystemClass::s_FrameTimeDelta; //, SystemClass::s_FrameTimeOffset;
 int SystemClass::s_FrameCount;
 double SystemClass::s_FPSSmooth;
+bool SystemClass::s_MainThreadSwitchable = false;
 
 
 static double s_FPSSmoothValues[D_GDEMU_FPS_SMOOTHING];

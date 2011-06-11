@@ -59,8 +59,8 @@ public:
 	static void setVBlank(uint8_t value); // internal emu use only
 	static uint8_t getJ1Reset(); // internal emu use only
 
-	static unsigned short getNextSampleL(); // internal emu use only
-	static unsigned short getNextSampleR(); // internal emu use only
+	static short getNextSampleL(); // internal emu use only
+	static short getNextSampleR(); // internal emu use only
 
 	static bool isScreenshotRequested(); // internal emu use only
 
