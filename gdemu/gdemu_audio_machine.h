@@ -49,6 +49,10 @@ public:
 
 	static void process();
 
+public:
+	static bool SampleLRBufferEnabled;
+	static int SampleLRBufferFreqHz;
+
 private:
 	AudioMachineClass(const AudioMachineClass &);
 	AudioMachineClass &operator=(const AudioMachineClass &);

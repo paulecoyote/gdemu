@@ -32,7 +32,11 @@
 
 // System includes
 
-// Project includes
+// Project includes (include standard stuff for user)
+#include "gdemu_audio_machine.h"
+#include "gdemu_graphics_machine.h"
+#include "gdemu_j1.h"
+#include "gdemu_keyboard.h"
 
 namespace GDEMU {
 

@@ -48,14 +48,19 @@ AudioMachineClass AudioMachine;
 
 static D_GDEMU_AUDIOFP s_AudioRad[64] = { 0 };
 
-// for cheap nearest resampling because proper resampling is not implemented in the wasapi driver
-static double s_SecondsPassedFor8000 = 1.0 / 8000.0;
-static const double s_SecondsPerSample8000 = 1.0 / 8000.0;
+// for cheap nearest resampling
+static double s_SecondsPassedForLRBufferSample = 0.0;
+static double s_SecondsPerLRBufferSample = 1.0 / 8000.0;
 static short s_SampleL = 0;
 static short s_SampleR = 0;
 
+bool AudioMachineClass::SampleLRBufferEnabled = false;
+int AudioMachineClass::SampleLRBufferFreqHz = 8000;
+
 void AudioMachineClass::process()
 {
+	s_SecondsPerLRBufferSample = 1.0 / (double)SampleLRBufferFreqHz;
+	
 	unsigned char *gameduinoRam = GameduinoSPI.getRam();
 
 	int audioFrequency = AudioDriver.getFrequency();
@@ -71,21 +76,29 @@ void AudioMachineClass::process()
 		// sample (with quick n dirty resampling with horrible ringing) :)
 		for (int s = 0; s < samples; ++s)
 		{
-			if (s_SecondsPassedFor8000 >= s_SecondsPerSample8000)
+			if (SampleLRBufferEnabled)
 			{
-				s_SecondsPassedFor8000 -= s_SecondsPerSample8000;
-				/*unsigned short sampleL = GameduinoSPI.getNextSampleL();
-				unsigned short sampleR = GameduinoSPI.getNextSampleR();
-				if (sampleL == 0) sampleL = 0x8000; // because!
-				if (sampleR == 0) sampleR = 0x8000;
-				s_SampleL = (short)((int)sampleL - 0x8000);
-				s_SampleR = (short)((int)sampleR - 0x8000);*/
-				s_SampleL = GameduinoSPI.getNextSampleL();
-				s_SampleR = GameduinoSPI.getNextSampleR();
+				while (s_SecondsPassedForLRBufferSample >= s_SecondsPerLRBufferSample)
+				{
+					s_SecondsPassedForLRBufferSample -= s_SecondsPerLRBufferSample;
+					/*unsigned short sampleL = GameduinoSPI.getNextSampleL();
+					unsigned short sampleR = GameduinoSPI.getNextSampleR();
+					if (sampleL == 0) sampleL = 0x8000; // because!
+					if (sampleR == 0) sampleR = 0x8000;
+					s_SampleL = (short)((int)sampleL - 0x8000);
+					s_SampleR = (short)((int)sampleR - 0x8000);*/
+					s_SampleL = GameduinoSPI.getNextSampleL();
+					s_SampleR = GameduinoSPI.getNextSampleR();
+				}
+				audioBuffer[s * 2] = s_SampleL;
+				audioBuffer[(s * 2) + 1] = s_SampleR;
+				s_SecondsPassedForLRBufferSample += secondsPerSample;
 			}
-			audioBuffer[s * 2] = s_SampleL;
-			audioBuffer[(s * 2) + 1] = s_SampleR;
-			s_SecondsPassedFor8000 += secondsPerSample;
+			else
+			{
+				audioBuffer[s * 2] = GameduinoSPI.getNextSampleL();
+				audioBuffer[(s * 2) + 1] = GameduinoSPI.getNextSampleR();
+			}
 		}
 		// voices
 		for (int i = 0; i < 64; ++i)

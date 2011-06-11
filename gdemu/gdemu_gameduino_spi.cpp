@@ -35,6 +35,7 @@
 
 // Project includes
 #include "gdemu_system.h"
+#include "gdemu_audio_machine.h"
 #include "GD.h"
 
 // using namespace ...;
@@ -72,7 +73,7 @@ static int s_IdenticalRequestCounter = 0;
 static bool s_ScreenshotRequested = false;
 
 // Buffer because we don't playback realtime
-// Implementation assumes native sampling rate (8000Hz) feed for convenience
+// Implementation assumes native sampling rate (8000Hz) feed for convenience (now configurable trough AudioMachine.SampleLRBufferFreqHz)
 #define D_GDEMU_SAMPLEBUFFER 800
 static uint8_t s_SampleL1[D_GDEMU_SAMPLEBUFFER + 1];
 static uint8_t s_SampleL2[D_GDEMU_SAMPLEBUFFER + 1];
@@ -102,7 +103,7 @@ void GameduinoSPIClass::begin()
 
 void GameduinoSPIClass::end()
 {
-
+	
 }
 
 void GameduinoSPIClass::setVBlank(uint8_t value)
@@ -141,28 +142,42 @@ void GameduinoSPIClass::slaveSelectChanged(uint8_t val)
 
 short GameduinoSPIClass::getNextSampleL()
 {
-	short result = (((short)s_SampleL2[s_SampleLR]) << 8) | (((short)s_SampleL1[s_SampleLR]) & 0xFF);
-
-	int nextL = (s_SampleLR + 1) % D_GDEMU_SAMPLEBUFFER;
-	if (nextL != s_SampleLW)
+	if (AudioMachine.SampleLRBufferEnabled)
 	{
-		s_SampleLR = nextL;
+		short result = (((short)s_SampleL2[s_SampleLR]) << 8) | (((short)s_SampleL1[s_SampleLR]) & 0xFF);
+
+		int nextL = (s_SampleLR + 1) % D_GDEMU_SAMPLEBUFFER;
+		if (nextL != s_SampleLW)
+		{
+			s_SampleLR = nextL;
+		}
+		
+		return result;
 	}
-	
-	return result;
+	else
+	{
+		return ((short *)(void *)&s_GdRam[SAMPLE_L])[0];
+	}
 }
 
 short GameduinoSPIClass::getNextSampleR()
 {
-	short result = (((short)s_SampleR2[s_SampleRR]) << 8) | (((short)s_SampleR1[s_SampleRR]) & 0xFF);
-
-	int nextR = (s_SampleRR + 1) % D_GDEMU_SAMPLEBUFFER;
-	if (nextR != s_SampleRW)
+	if (AudioMachine.SampleLRBufferEnabled)
 	{
-		s_SampleRR = nextR;
+		short result = (((short)s_SampleR2[s_SampleRR]) << 8) | (((short)s_SampleR1[s_SampleRR]) & 0xFF);
+
+		int nextR = (s_SampleRR + 1) % D_GDEMU_SAMPLEBUFFER;
+		if (nextR != s_SampleRW)
+		{
+			s_SampleRR = nextR;
+		}
+		
+		return result;
 	}
-	
-	return result;
+	else
+	{
+		return ((short *)(void *)&s_GdRam[SAMPLE_R])[0];
+	}
 }
 
 uint8_t GameduinoSPIClass::getJ1Reset()
