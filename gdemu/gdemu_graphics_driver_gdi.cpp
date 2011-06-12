@@ -42,9 +42,12 @@ using namespace std;
 #define GDEMU_WINDOW_WIDTH 400
 #define GDEMU_WINDOW_HEIGHT 300
 #define GDEMU_WINDOW_RATIO (4.0f / 3.0f)
-#define GDEMU_WINDOW_KEEPRATIO (true)
+#define GDEMU_WINDOW_KEEPRATIO 1
 
 #define GDEMU_WINDOW_CLASS_NAME TEXT("GDEMUGraphicsDriver")
+
+// Getting more CPU usage with StretchDIBits for some reason, so I don't use it.
+#define GDEMU_GRAPHICS_USE_STRETCHDIBITS 0
 
 namespace GDEMU {
 
@@ -61,8 +64,10 @@ static HWND s_HWnd = NULL;
 //static bool s_KeepRatio;
 static std::map<UINT, WNDPROC> s_WindowProcedures;
 //static ULONG_PTR s_GdiplusToken;
+#if !GDEMU_GRAPHICS_USE_STRETCHDIBITS
 static HBITMAP s_Buffer = NULL;
 static HDC s_HDC = NULL;//, m_WindowGraphics;
+#endif
 //static Gdiplus::Graphics *m_GraphicsPtr;
 
 
@@ -151,6 +156,7 @@ void GraphicsDriverClass::begin()
 	if (!UpdateWindow(s_HWnd)) SystemWindows.ErrorWin32();
 
 	// Create GDI32 Buffer and Device Context
+#if !GDEMU_GRAPHICS_USE_STRETCHDIBITS
 	HDC hdc = GetDC(s_HWnd);
 	if (s_HDC) SystemWindows.Error(TEXT("GraphicsDriver.begin()  s_HDC != NULL"));
 	s_HDC = CreateCompatibleDC(hdc);
@@ -160,6 +166,7 @@ void GraphicsDriverClass::begin()
 	if (!s_Buffer) SystemWindows.Error(TEXT("GraphicsDriver.begin()  s_Buffer == NULL\r\n") + SystemWindows.GetWin32LastErrorString());
 	SelectObject(s_HDC, s_Buffer);
 	ReleaseDC(s_HWnd, hdc);
+#endif
 
 	// Verify Maps
 	//if (!Bitmap::m_HBitmaps.empty()) SystemWindows.Error(TEXT("GraphicsDriver.begin()  Bitmap::m_HBitmaps.empty() == false"));
@@ -201,10 +208,12 @@ void GraphicsDriverClass::end()
 		s_WindowProcedures.clear();
 	}
 
+#if !GDEMU_GRAPHICS_USE_STRETCHDIBITS
 	if (s_HDC) { DeleteDC(s_HDC); s_HDC = NULL; }
 	else SystemWindows.Debug(TEXT("GraphicsDriver.end() s_HDC == NULL"));
 	if (s_Buffer) { DeleteObject(s_Buffer); s_Buffer = NULL; }
 	else SystemWindows.Debug(TEXT("GraphicsDriver.end() s_Buffer == NULL"));
+#endif
 
 	if (s_HWnd) { DestroyWindow(s_HWnd); s_HWnd = NULL; }
 	else SystemWindows.Debug(TEXT("GraphicsDriver.end() s_HWnd == NULL"));
@@ -215,15 +224,17 @@ void GraphicsDriverClass::end()
 void GraphicsDriverClass::renderBuffer()
 {
 	// Render bitmap to buffer
+#if !GDEMU_GRAPHICS_USE_STRETCHDIBITS
 	if (!SetDIBitsToDevice(s_HDC, 0, 0, 
 		GDEMU_WINDOW_WIDTH, GDEMU_WINDOW_HEIGHT, 
 		0, 0, 0, GDEMU_WINDOW_HEIGHT, s_BufferARGB1555, &s_BitInfo, DIB_RGB_COLORS))
 		SystemWindows.Error(TEXT("SetDIBitsToDevice  FAILED"));
+#endif
 
 	// Draw buffer to screen
 	RECT r;
 	GetClientRect(s_HWnd, &r);
-	if (GDEMU_WINDOW_KEEPRATIO)
+#if GDEMU_WINDOW_KEEPRATIO
 	{
 		argb1555 bgC16 = ((argb1555 *)(void *)(&GameduinoSPI.getRam()[0x280e]))[0];
 		COLORREF bgC32 = RGB((((bgC16) & 0x1F) * 255 / 31),
@@ -236,8 +247,12 @@ void GraphicsDriverClass::renderBuffer()
 		else height_r = r.bottom;
 		int x_r = (r.right - width_r) / 2;
 		int y_r = (r.bottom - height_r) / 2;
-		HDC hdc = GetDC(s_HWnd);		
+		HDC hdc = GetDC(s_HWnd);
+#if !GDEMU_GRAPHICS_USE_STRETCHDIBITS
 		StretchBlt(hdc, x_r, y_r, width_r, height_r, s_HDC, 0, 0, GDEMU_WINDOW_WIDTH, GDEMU_WINDOW_HEIGHT, SRCCOPY);
+#else
+		StretchDIBits(hdc, x_r, y_r, width_r, height_r,	0, 0, GDEMU_WINDOW_WIDTH, GDEMU_WINDOW_HEIGHT, s_BufferARGB1555, &s_BitInfo, DIB_RGB_COLORS, SRCCOPY);
+#endif
 		RECT rect;
 		if (x_r > 0)
 		{
@@ -263,12 +278,17 @@ void GraphicsDriverClass::renderBuffer()
 		ReleaseDC(s_HWnd, hdc);
 		if (!DeleteObject(bgBrush)) SystemWindows.ErrorWin32();
 	}
-	else
+#else
 	{
-		HDC hdc = GetDC(s_HWnd);		
+		HDC hdc = GetDC(s_HWnd);	
+#if !GDEMU_GRAPHICS_USE_STRETCHDIBITS	
 		StretchBlt(hdc, 0, 0, r.right, r.bottom, s_HDC, 0, 0, GDEMU_WINDOW_WIDTH, GDEMU_WINDOW_HEIGHT, SRCCOPY);
+#else
+		StretchDIBits(hdc, 0, 0, r.right, r.bottom, 0, 0, GDEMU_WINDOW_WIDTH, GDEMU_WINDOW_HEIGHT, s_BufferARGB1555, &s_BitInfo, DIB_RGB_COLORS, SRCCOPY);
+#endif
 		ReleaseDC(s_HWnd, hdc);
 	}
+#endif
 
 	// Update title
 	tstringstream newTitle;
