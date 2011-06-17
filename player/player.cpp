@@ -77,8 +77,8 @@ void adsr()  // handle ADSR for 64 voices
 void loop()
 {
   prog_uchar *pc;
-  long started = millis();
-  int ticks = 0;
+  uint32_t started = millis();
+  uint32_t ticks = 0;
   for (pc = mont; pc < mont + sizeof(mont);) {
     byte cmd = pgm_read_byte_near(pc++);  // upper 2 bits are command code
     if ((cmd & 0xc0) == 0) {
@@ -90,7 +90,7 @@ void loop()
       }
     } else {
       byte v = (cmd & 63);
-      byte a;
+
       if ((cmd & 0xc0) == 0x40) {
         // Command 0x40: silence voice
         target[v] = 0;

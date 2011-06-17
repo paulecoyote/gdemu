@@ -45,7 +45,7 @@ void Print::write(const uint8_t *buffer, size_t size)
 
 void Print::print(const String &s)
 {
-  for (int i = 0; i < s.length(); i++) {
+  for (uint8_t i = 0; i < s.length(); i++) {
     write(s[i]);
   }
 }
@@ -78,7 +78,7 @@ void Print::print(unsigned int n, int base)
 void Print::print(long n, int base)
 {
   if (base == 0) {
-    write(n);
+    write((uint8_t)n);
   } else if (base == 10) {
     if (n < 0) {
       print('-');
@@ -92,7 +92,7 @@ void Print::print(long n, int base)
 
 void Print::print(unsigned long n, int base)
 {
-  if (base == 0) write(n);
+  if (base == 0) write((uint8_t)n);
   else printNumber(n, base);
 }
 

@@ -21,6 +21,9 @@
 #include "WProgram.h"
 #include "WString.h"
 
+// Disable security messages for string functions, otherwise warnings generated.
+// E.g. strcat is unsafe, consider using strcat_s.
+#pragma warning(disable : 4996)
 
 String::String( const char *value )
 {
@@ -61,7 +64,7 @@ String::String( const unsigned char value )
 String::String( const int value, const int base )
 {
   char buf[33];   
-  itoa((signed long)value, buf, base);
+  _itoa((signed long)value, buf, base);
   getBuffer( _length = strlen(buf) );
   if ( _buffer != NULL )
     strcpy( _buffer, buf );
@@ -79,7 +82,7 @@ String::String( const unsigned int value, const int base )
 String::String( const long value, const int base )
 {
   char buf[33];   
-  ltoa(value, buf, base);
+  _ltoa(value, buf, base);
   getBuffer( _length = strlen(buf) );
   if ( _buffer != NULL )
     strcpy( _buffer, buf );

@@ -333,7 +333,7 @@ void GameduinoSPIClass::writeRam16(int offset, short value)
 		switch (offset)
 		{
 		case 0x800e: // P2_V
-			digitalWrite(2, value);
+			digitalWrite(2, (uint8_t)value);
 			break;
 		}
 	}

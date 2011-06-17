@@ -37,12 +37,12 @@
 // Defines
 #define SPI_CLOCK_DIV4 0x00
 #define SPI_CLOCK_DIV16 0x01
-#define SPI_CLOCK_DIV64 0x02
+////#define SPI_CLOCK_DIV64 0x02 // TODO: See SPI_CLOCK_DIV64 redef below
 #define SPI_CLOCK_DIV128 0x03
 #define SPI_CLOCK_DIV2 0x04
 #define SPI_CLOCK_DIV8 0x05
 #define SPI_CLOCK_DIV32 0x06
-#define SPI_CLOCK_DIV64 0x07
+#define SPI_CLOCK_DIV64 0x07  //TODO: What *should* this be (redefines DIV64)
 
 #define SPI_MODE0 0x00
 #define SPI_MODE1 0x04

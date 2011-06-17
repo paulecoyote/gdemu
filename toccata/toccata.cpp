@@ -16,7 +16,7 @@ void load()
   for (v = 0; v < 16; v++) {
     sum += voices[v].a;
   }
-  float scale = 255.0 / sum;
+  float scale = 255.0f / sum;
   for (v = 0; v < 16; v++) {
     byte a = int(voices[v].a * scale);
     GD.voice(v, 0, int(4 * voices[v].f), a, a);
@@ -37,14 +37,14 @@ void note(byte voice, byte m, byte vel)
     sprites[sprnum].y = 284 - 8 * m;
     sprnum = (sprnum + 1) & 63;
   }
-  float f0 = 440 * pow(2.0, (m - 69) / 12.0);
-  float a0 = vel / 120.;
+  float f0 = 440.0f * pow(2.0f, (m - 69) / 12.0f);
+  float a0 = vel / 120.0f;
   if (voice == 0) {
     float choirA[] = { 3.5, 1.6, .7, 3.7, 1, 2 };
     byte v;
     for (v = 0; v < 6; v++) {
       voices[v].f = (v + 1) * f0;
-      voices[v].a = a0 * choirA[v] / 3.7;
+      voices[v].a = a0 * choirA[v] / 3.7f;
     }
   } else {
     voices[voice].f = f0;
@@ -55,7 +55,7 @@ void note(byte voice, byte m, byte vel)
 static void pause(int n)
 {
   load();
-  long started = millis();
+  uint32_t started = millis();
   while (millis() < (started + n * 3 / 2)) {
     GD.waitvblank();
     byte i;
@@ -94,8 +94,6 @@ static void play()
 
 void setup()
 {
-  int i;
-
   GD.begin();
   
   GD.ascii();

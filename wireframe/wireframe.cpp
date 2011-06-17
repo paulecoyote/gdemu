@@ -8,6 +8,10 @@
 #include "wireframe.h"
 #include "eraser.h"
 
+// Disable security messages for string functions, otherwise warnings generated.
+// E.g. strcat is unsafe, consider using strcat_s.
+#pragma warning(disable : 4996)
+
 // replicate a 2-bit color across the whole byte.
 byte replicate(byte color)
 {
@@ -112,7 +116,6 @@ void PlotterClass::line(byte x0, byte y0, byte x1, byte y1)
     ystep = 1;
   else
     ystep = -1;
-  byte x;
   byte y = y0;
 
   waitready();
@@ -179,7 +182,6 @@ static byte projected[30 * 2];
 
 void project(struct ship *s, float distance)
 {
-  byte vx;
   prog_char *pm = s->vertices; 
   prog_char *pm_e = pm + (s->nvertices * 3);
   byte *dst = projected;
@@ -254,10 +256,10 @@ void loop()
 
   int d;
   for (d = 0; d < 100; d++)
-    cycle(1000 - 10 * d);
+    cycle((float)(1000 - 10 * d));
   for (d = 0; d < 72*6; d++) 
     cycle(0.0);
   for (d = 0; d < 100; d++)
-    cycle(10 * d);
+    cycle((float)(10 * d));
   sn = (sn + 1) % NSHIPS;
 }

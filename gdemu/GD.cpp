@@ -153,8 +153,7 @@ void GDClass::xsprite(int16_t ox, int16_t oy, char x, char y, byte image, byte p
   if (rot & 4)
     y = -16-y;
   if (rot & 1) {
-      int16_t s;
-      s = x; x = y; y = s;
+      char s = x; x = y; y = s;
   }
   ox += x;
   oy += y;
@@ -325,13 +324,13 @@ static GDflashbits GDFB;
 void GDClass::uncompress(uint16_t addr, prog_uchar *src)
 {
   GDFB.begin(src);
-  byte b_off = GDFB.getn(4);
-  byte b_len = GDFB.getn(4);
-  byte minlen = GDFB.getn(2);
+  byte b_off = (byte)GDFB.getn(4);
+  byte b_len = (byte)GDFB.getn(4);
+  byte minlen = (byte)GDFB.getn(2);
   unsigned short items = GDFB.getn(16);
   while (items--) {
     if (GDFB.get1() == 0) {
-      GD.wr(addr++, GDFB.getn(8));
+      GD.wr(addr++, (byte)GDFB.getn(8));
     } else {
       int16_t offset = -GDFB.getn(b_off) - 1;
       int16_t l = GDFB.getn(b_len) + minlen;

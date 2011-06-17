@@ -293,7 +293,7 @@ static void explodehere(struct object *po, byte handler, uint16_t clock)
     objects[e].x = po->x;
     objects[e].y = po->y;
     objects[e].handler = handler;
-    objects[e].state = clock;
+    objects[e].state = (byte)clock;
   }
 }
 
@@ -305,7 +305,7 @@ static void killplayer(uint16_t clock)
       objects[e].x = COORD(200);
       objects[e].y = COORD(150);
       objects[e].handler = HANDLE_BANG1;
-      objects[e].state = clock;
+      objects[e].state = (byte)clock;
     }
     player_dying = 2 * 36;
     sounds.boom = 1;
@@ -441,13 +441,13 @@ static GDflashbits GDFB;
 static void GD_uncompress(unsigned int addr, PROGMEM prog_uchar *src)
 {
   GDFB.begin(src);
-  byte b_off = GDFB.getn(4);
-  byte b_len = GDFB.getn(4);
-  byte minlen = GDFB.getn(2);
+  byte b_off = (byte)GDFB.getn(4);
+  byte b_len = (byte)GDFB.getn(4);
+  byte minlen = (byte)GDFB.getn(2);
   unsigned short items = GDFB.getn(16);
   while (items--) {
     if (GDFB.get1() == 0) {
-      GD.wr(addr++, GDFB.getn(8));
+      GD.wr(addr++, (byte)GDFB.getn(8));
     } else {
       int offset = -GDFB.getn(b_off) - 1;
       int l = GDFB.getn(b_len) + minlen;
@@ -758,7 +758,7 @@ static void title_banner()
     GD.setpal(4 * i + 3, color);
   }
   for (i = 0; i < 64; i++) {
-    column(i, i);
+    column((byte)i, (byte)i);
   }
 
   for (i = 0; i < 128; i++) {
@@ -767,7 +767,7 @@ static void title_banner()
   }
 
   for (i = 0; i < 128; i++)
-    push(&enemies, i);
+    push(&enemies, (byte)i);
 
   for (i = 0; i < 40; i++) {
     char e = pop(&enemies);
@@ -791,7 +791,7 @@ static void title_banner()
         byte h = objects[j].handler;
         if ((h == HANDLE_ROCK0) || (h == HANDLE_ROCK1))
           objects[j].handler = HANDLE_BANG1;
-          objects[j].state = i;
+          objects[j].state = (byte)i;
         }
       startgame = 1;
     }
@@ -858,10 +858,8 @@ void loop()
   start_level();
 
   while (lives) {
-    int i, j;
-
     runobjects(r);
-
+    int i;
     for (i = 0; i < 128; i++)
       objects[i].collide = 0xff;
 

@@ -1,6 +1,10 @@
 #include <SPI.h>
 #include <GD.h>
 
+// Disable security messages for string functions, otherwise warnings generated.
+// E.g. strcat is unsafe, consider using strcat_s.
+#pragma warning(disable : 4996)
+
 int atxy(int x, int y)
 {
   return (y << 6) + x;
@@ -164,7 +168,7 @@ int test_audio_r()
 int test_speed()
 {
   long t0 = millis();
-  int i, j;
+  int i;
   for (i = 0; i < 1000; i++) {
     GD.fill(RAM_SPRIMG, 0x55, 1000);
   }
