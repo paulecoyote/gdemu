@@ -1,6 +1,6 @@
 #Project specific
-x.sdf
-x.opensdf
+UnitTest++.vsnet2010.sdf
+UnitTest++.opensdf
 
 #ignore thumbnails created by windows
 Thumbs.db
