@@ -1,0 +1,137 @@
+#Project specific
+gdemu.sdf
+gdemu.opensdf
+
+#ignore thumbnails created by windows
+Thumbs.db
+
+#Ignore mercurial and subversion
+.hg/
+.svn/
+
+# Test and application directories
+screenshots
+release
+test
+Temp
+
+# Various build directories
+build/*
+install/*
+[Bb]in
+[Dd]ebug*/
+obj/
+[Rr]elease*/
+_ReSharper*/
+[Tt]est[Rr]esult*
+
+#Ignore files built by Visual Studio
+# */*.lib
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.pyc
+*.sbr
+*.vcxproj.filters
+*.ipch
+ipch/
+_UpgradeReport_Files/
+
+# Linux compile
+*.a
+*.la
+*.lo
+*.Po
+*.Plo
+*.o
+*.so
+*.so.*
+*_debug
+core
+*.pc
+*.gch
+
+# Mac OS X compile
+*.dylib
+
+# Log dump files
+report_refused
+report_failed
+exception_catched
+*.stat
+*.log
+log.txt
+
+# Max plugin extensions
+*.dlx
+*.dlm
+*.dlu
+
+# makeall build
+.mode_static
+
+# cmake build files & directories
+CMakeFiles
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+CPackConfig.cmake
+CPackSourceConfig.cmake
+.libs
+
+# Linux garbage
+Makefile*
+aclocal.m4
+config.guess
+config.sub
+configure
+depcomp
+config.h.in
+nelconfig.h.in
+install-sh
+ltmain.sh
+missing
+ylwrap
+*.mk
+
+# Mac OS X garbage
+.DS_Store
+
+# Vim and kwrite cache
+*~
+
+# Kdevelop4 garbage
+*.kdev4
+.kdev4
+
+# Python cache
+*.pyd
+*.pyc
+
+# Qt compiler
+moc_*.cpp
+*.moc
+
+# Misc garbage
+*.rej
+*.orig
+*.cachefile
+*.cache
+*.patch
+*.7z
+#external
+#3rdParty
