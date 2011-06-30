@@ -1,29 +1,27 @@
 ## gdemu - Gameduino Emulator
-An emulator for the retro-gaming Gameduino [0] hardware.
+An emulator for the retro-gaming [Gameduino][0] hardware.
 
 Intended to make development and debugging easier. Just compile your game's code together with the emulator library, and run and debug directly on your PC.
 
 Get the original source here: http://code.google.com/p/gdemu/source/checkout
-First home on git hub here (case important): http://github.com/PaulECoyote/gdemu
+
+First home on github here (case important in url): http://github.com/PaulECoyote/gdemu
 
 ## Credit
 
-James Bowman - Creator of the Gameduino [0]
+James Bowman - [Creator of the Gameduino][0]
 
-Jan Boon - Original author
-* http://www.kaetemi.be/
-* http://twitter.com/#!/kaetemi
+Jan Boon - Original author - http://www.kaetemi.be/ + http://twitter.com/#!/kaetemi
 
 ### Contributors
-* Paul Evans
-	http://paulecoyote.com
-	http://twitter.com/#!/paulecoyote
+* Paul Evans - http://paulecoyote.com + http://twitter.com/#!/paulecoyote
 
 ## Links
 ### Gamedunio 
 * http://excamera.com/sphinx/gameduino/
 * http://twitter.com/#!/gameduino
 * http://answers.gameduino.com/questions/
+
 ### Gameduino Tutorials
 * http://www.artlum.com/gameduino/gameduino.html
 
