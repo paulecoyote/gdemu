@@ -7,15 +7,6 @@ Get the original source here: http://code.google.com/p/gdemu/source/checkout
 
 First home on github here (case important in url): http://github.com/PaulECoyote/gdemu
 
-## Credit
-
-James Bowman - [Creator of the Gameduino][0]
-
-Jan Boon - Original author - http://www.kaetemi.be/ + http://twitter.com/#!/kaetemi
-
-### Contributors
-* Paul Evans - http://paulecoyote.com + http://twitter.com/#!/paulecoyote
-
 ## Setup
 You need to have the [DirectX SDK][DX_SDK] installed.  
 Make sure that the VC++ directories for includes and libraries includes "$(DXSDK_DIR)include" and "$(DXSDK_DIR)lib\x86".  
@@ -30,15 +21,26 @@ In Visual Studio 2010 these directories should be set in Microsoft.Cpp.Win32.use
 ### Gameduino Tutorials
 * http://www.artlum.com/gameduino/gameduino.html
 
+## Credit
+
+James Bowman - [Creator of the Gameduino][0]
+
+Jan Boon - Original author - http://www.kaetemi.be/ + http://twitter.com/#!/kaetemi
+
+### Contributors
+* Paul Evans - http://paulecoyote.com + http://twitter.com/#!/paulecoyote
+
 License
 -------
 * Core emulator libraries [GNU GPL v2][10]
-* [Original author gave permission][7] for games to be included but use a different licence MIT/BSD/etc where GPL is incompatible.
+* Original author [gave][7] [permission][7b] for games to be included but use a different licence MIT/BSD/etc where GPL is incompatible.
 
 Changelog
 ---------
+Versions only really make sense for this fork.
 
-TODO
+* V0.1.0 Imported in to github from google code, added UnitTest++ as submodule.  Solution compiles with no warnings.
+* V0.1.1 Provided Visual Studio 2010 solutions.
 
 [0]: http://excamera.com/sphinx/gameduino/
 [1]: http://code.google.com/p/gdemu/source/checkout
@@ -48,8 +50,9 @@ TODO
 [5]: http://paulecoyote.com
 [6]: http://twitter.com/#!/gameduino
 [7]: http://twitter.com/#!/kaetemi/status/84115376404836352
+[7b]: http://twitter.com/#!/paulecoyote/status/84028090866601984
 [8]: http://answers.gameduino.com/questions/
 [9]: http://www.artlum.com/gameduino/gameduino.html
 [10]: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 [11]: https://github.com/PaulECoyote/gdemu
-[DX_SDK}: http://www.microsoft.com/download/en/details.aspx?displaylang=en&id=6812
+[DX_SDK]: http://www.microsoft.com/download/en/details.aspx?displaylang=en&id=6812
