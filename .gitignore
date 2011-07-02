@@ -1,6 +1,8 @@
 #Project specific
 gdemu.sdf
 gdemu.opensdf
+gdemu.*.sdf
+gdemu.*.opensdf
 
 #ignore thumbnails created by windows
 Thumbs.db
@@ -50,6 +52,7 @@ _ReSharper*/
 *.ipch
 ipch/
 _UpgradeReport_Files/
+UpgradeLog.XML
 
 # Linux compile
 *.a
