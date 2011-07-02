@@ -16,6 +16,11 @@ Jan Boon - Original author - http://www.kaetemi.be/ + http://twitter.com/#!/kaet
 ### Contributors
 * Paul Evans - http://paulecoyote.com + http://twitter.com/#!/paulecoyote
 
+## Setup
+You need to have the [DirectX SDK][DX_SDK] installed.  
+Make sure that the VC++ directories for includes and libraries includes "$(DXSDK_DIR)include" and "$(DXSDK_DIR)lib\x86".  
+In Visual Studio 2010 these directories should be set in Microsoft.Cpp.Win32.user property page.
+
 ## Links
 ### Gamedunio 
 * http://excamera.com/sphinx/gameduino/
@@ -47,3 +52,4 @@ TODO
 [9]: http://www.artlum.com/gameduino/gameduino.html
 [10]: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 [11]: https://github.com/PaulECoyote/gdemu
+[DX_SDK}: http://www.microsoft.com/download/en/details.aspx?displaylang=en&id=6812
