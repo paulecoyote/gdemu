@@ -1,6 +1,8 @@
 // Game functions
+#include "game.h"
 
-namespace Game {
+namespace Game 
+{
   void Loop()
   {
   }

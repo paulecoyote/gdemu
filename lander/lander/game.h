@@ -1,5 +1,6 @@
 // Game functions
 
-namespace Game {
+namespace Game 
+{
   void Loop(void);
 }

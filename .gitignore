@@ -30,7 +30,7 @@ _ReSharper*/
 #Ignore files built by Visual Studio
 # */*.lib
 *.obj
-*.exe
+# *.exe # Nope, or lander.exe stuff wouldn't add ... whoops!
 *.pdb
 *.user
 *.aps
