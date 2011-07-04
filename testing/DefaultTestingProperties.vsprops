@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="DefaultTestingProperties"
+	OutputDirectory="$(SolutionDir)bin\$(ConfigurationName)\"
+	IntermediateDirectory="$(SolutionDir)obj\$(ProjectName)\$(ConfigurationName)\"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories="..\..\gdemu;&quot;$(SolutionDir)testing\unittestpp\src&quot;"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalLibraryDirectories="&quot;$(SolutionDir)bin\$(ConfigurationName)\&quot;;&quot;$(SolutionDir)obj\$(ProjectName)\$(ConfigurationName)\&quot;"
+	/>
+</VisualStudioPropertySheet>

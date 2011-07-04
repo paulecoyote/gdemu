@@ -3,41 +3,46 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gdemu", "gdemu\gdemu.vs2010.vcxproj", "{1D0FFC70-0620-496E-B00D-9AD798B3856D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "selftest", "selftest\selftest.vs2010.vcxproj", "{2DD9C744-CFFD-4D05-B81E-E29754E88128}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "selftest", "testing\selftest\selftest.vs2010.vcxproj", "{2DD9C744-CFFD-4D05-B81E-E29754E88128}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "asteroids", "asteroids\asteroids.vs2010.vcxproj", "{0A8A89B9-A659-4066-858A-9E2E7513C08E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "asteroids", "apps\asteroids\asteroids.vs2010.vcxproj", "{0A8A89B9-A659-4066-858A-9E2E7513C08E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "chessboard", "chessboard\chessboard.vs2010.vcxproj", "{07A85AAB-459A-4D52-8220-E4A0602D0989}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "chessboard", "apps\chessboard\chessboard.vs2010.vcxproj", "{07A85AAB-459A-4D52-8220-E4A0602D0989}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ball", "ball\ball.vs2010.vcxproj", "{294BB5F4-5DCA-48F8-A664-457C2036D48F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ball", "apps\ball\ball.vs2010.vcxproj", "{294BB5F4-5DCA-48F8-A664-457C2036D48F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wireframe", "wireframe\wireframe.vs2010.vcxproj", "{1DFAE574-13EB-4677-8A01-580C014D9F3C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wireframe", "apps\wireframe\wireframe.vs2010.vcxproj", "{1DFAE574-13EB-4677-8A01-580C014D9F3C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "player", "player\player.vs2010.vcxproj", "{49A3B263-B00B-40DC-A8F1-72D76189B953}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "player", "apps\player\player.vs2010.vcxproj", "{49A3B263-B00B-40DC-A8F1-72D76189B953}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "toccata", "toccata\toccata.vs2010.vcxproj", "{624D0D8B-F918-42FB-BFBD-5280A4E10020}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "toccata", "apps\toccata\toccata.vs2010.vcxproj", "{624D0D8B-F918-42FB-BFBD-5280A4E10020}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample", "sample\sample.vs2010.vcxproj", "{F4870995-AD8E-41DB-BF74-23656F63ECE2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample", "apps\sample\sample.vs2010.vcxproj", "{F4870995-AD8E-41DB-BF74-23656F63ECE2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "invaders", "invaders\invaders.vs2010.vcxproj", "{062C4829-C8D0-40C2-9291-1077496C44F2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lander", "apps\lander\lander\lander.vs2010.vcxproj", "{94982361-7D96-4922-B9E7-E75DF1FA7E01}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lander", "lander\lander\lander.vs2010.vcxproj", "{94982361-7D96-4922-B9E7-E75DF1FA7E01}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lander.tests", "apps\lander\lander.tests\lander.tests.vs2010.vcxproj", "{5075704C-6A59-4FCC-A351-BB0FF2149BD9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lander.tests", "lander\lander.tests\lander.tests.vs2010.vcxproj", "{5075704C-6A59-4FCC-A351-BB0FF2149BD9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest++", "testing\unittestpp\UnitTest++.vsnet2010.vcxproj", "{64A4FEFE-0461-4E95-8CC1-91EF5F57DBC6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest++", "unittestpp\UnitTest++.vsnet2010.vcxproj", "{64A4FEFE-0461-4E95-8CC1-91EF5F57DBC6}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestUnitTest++", "unittestpp\TestUnitTest++.vsnet2010.vcxproj", "{9CCC3439-309E-4E85-B3B8-CE704D385D48}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestUnitTest++", "testing\unittestpp\TestUnitTest++.vsnet2010.vcxproj", "{9CCC3439-309E-4E85-B3B8-CE704D385D48}"
 	ProjectSection(ProjectDependencies) = postProject
 		{64A4FEFE-0461-4E95-8CC1-91EF5F57DBC6} = {64A4FEFE-0461-4E95-8CC1-91EF5F57DBC6}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lander.exe", "lander\lander.exe\lander.exe.vs2010.vcxproj", "{301FD545-44EF-4251-840A-F07EE967DA96}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lander.exe", "apps\lander\lander.exe\lander.exe.vs2010.vcxproj", "{301FD545-44EF-4251-840A-F07EE967DA96}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1EC0A407-99E0-4EC9-B1DC-348E6B27246C}"
 	ProjectSection(SolutionItems) = preProject
 		README.markdown = README.markdown
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gdcommon", "gdcommon\gdcommon.vs2010.vcxproj", "{8EBBCA76-8313-4243-939A-CE56A54F7E8D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1D0FFC70-0620-496E-B00D-9AD798B3856D} = {1D0FFC70-0620-496E-B00D-9AD798B3856D}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gdcommon.tests", "testing\gdcommon.tests\gdcommon.tests.vs2010.vcxproj", "{8FB3CB9D-A53D-4E7D-81F3-5D5A0D18E8EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,8 +86,6 @@ Global
 		{F4870995-AD8E-41DB-BF74-23656F63ECE2}.Debug|Win32.Build.0 = Debug|Win32
 		{F4870995-AD8E-41DB-BF74-23656F63ECE2}.Release|Win32.ActiveCfg = Release|Win32
 		{F4870995-AD8E-41DB-BF74-23656F63ECE2}.Release|Win32.Build.0 = Release|Win32
-		{062C4829-C8D0-40C2-9291-1077496C44F2}.Debug|Win32.ActiveCfg = Debug|Win32
-		{062C4829-C8D0-40C2-9291-1077496C44F2}.Release|Win32.ActiveCfg = Release|Win32
 		{94982361-7D96-4922-B9E7-E75DF1FA7E01}.Debug|Win32.ActiveCfg = Debug|Win32
 		{94982361-7D96-4922-B9E7-E75DF1FA7E01}.Debug|Win32.Build.0 = Debug|Win32
 		{94982361-7D96-4922-B9E7-E75DF1FA7E01}.Release|Win32.ActiveCfg = Release|Win32
@@ -103,6 +106,14 @@ Global
 		{301FD545-44EF-4251-840A-F07EE967DA96}.Debug|Win32.Build.0 = Debug|Win32
 		{301FD545-44EF-4251-840A-F07EE967DA96}.Release|Win32.ActiveCfg = Release|Win32
 		{301FD545-44EF-4251-840A-F07EE967DA96}.Release|Win32.Build.0 = Release|Win32
+		{8EBBCA76-8313-4243-939A-CE56A54F7E8D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8EBBCA76-8313-4243-939A-CE56A54F7E8D}.Debug|Win32.Build.0 = Debug|Win32
+		{8EBBCA76-8313-4243-939A-CE56A54F7E8D}.Release|Win32.ActiveCfg = Release|Win32
+		{8EBBCA76-8313-4243-939A-CE56A54F7E8D}.Release|Win32.Build.0 = Release|Win32
+		{8FB3CB9D-A53D-4E7D-81F3-5D5A0D18E8EC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8FB3CB9D-A53D-4E7D-81F3-5D5A0D18E8EC}.Debug|Win32.Build.0 = Debug|Win32
+		{8FB3CB9D-A53D-4E7D-81F3-5D5A0D18E8EC}.Release|Win32.ActiveCfg = Release|Win32
+		{8FB3CB9D-A53D-4E7D-81F3-5D5A0D18E8EC}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

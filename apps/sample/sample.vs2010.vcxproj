@@ -11,37 +11,37 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>gdemu</ProjectName>
-    <ProjectGuid>{1D0FFC70-0620-496E-B00D-9AD798B3856D}</ProjectGuid>
-    <RootNamespace>gdemu</RootNamespace>
-    <Keyword>ManagedCProj</Keyword>
+    <ProjectName>sample</ProjectName>
+    <ProjectGuid>{F4870995-AD8E-41DB-BF74-23656F63ECE2}</ProjectGuid>
+    <RootNamespace>sample</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <CLRSupport>false</CLRSupport>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <CLRSupport>false</CLRSupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\DefaultExeProperties.vs2010.props" />
+    <Import Project="..\DefaultAppsProperties.vs2010.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\DefaultExeProperties.vs2010.props" />
+    <Import Project="..\DefaultAppsProperties.vs2010.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
@@ -52,84 +52,63 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../gdemu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <FloatingPointModel>Fast</FloatingPointModel>
       <OpenMPSupport>true</OpenMPSupport>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../gdemu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
       <FloatingPointModel>Fast</FloatingPointModel>
       <OpenMPSupport>true</OpenMPSupport>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Reference Include="System">
-      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
-      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-    </Reference>
-    <Reference Include="System.Data">
-      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
-      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-    </Reference>
-    <Reference Include="System.Xml">
-      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
-      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-    </Reference>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="sample.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="gdemu_audio_driver.h" />
-    <ClInclude Include="gdemu_audio_machine.h" />
-    <ClInclude Include="gdemu_emulator.h" />
-    <ClInclude Include="gdemu_gameduino_spi.h" />
-    <ClInclude Include="gdemu_graphics_driver.h" />
-    <ClInclude Include="gdemu_graphics_machine.h" />
-    <ClInclude Include="gdemu_j1.h" />
-    <ClInclude Include="gdemu_keyboard.h" />
-    <ClInclude Include="gdemu_system.h" />
-    <ClInclude Include="gdemu_system_windows.h" />
-    <ClInclude Include="DummySerial.h" />
-    <ClInclude Include="inttypes.h" />
-    <ClInclude Include="avr\pgmspace.h" />
-    <ClInclude Include="SPI.h" />
-    <ClInclude Include="wiring.h" />
-    <ClInclude Include="WProgram.h" />
-    <ClInclude Include="binary.h" />
-    <ClInclude Include="Print.h" />
-    <ClInclude Include="Stream.h" />
-    <ClInclude Include="WString.h" />
-    <ClInclude Include="font8x8.h" />
-    <ClInclude Include="GD.h" />
+    <None Include="sample.vcproj" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="gdemu_audio_driver_wasapi.cpp" />
-    <ClCompile Include="gdemu_audio_machine.cpp" />
-    <ClCompile Include="gdemu_emulator.cpp" />
-    <ClCompile Include="gdemu_gameduino_spi.cpp" />
-    <ClCompile Include="gdemu_graphics_driver_gdi.cpp" />
-    <ClCompile Include="gdemu_graphics_machine.cpp" />
-    <ClCompile Include="gdemu_j1.cpp" />
-    <ClCompile Include="gdemu_keyboard_directinput.cpp" />
-    <ClCompile Include="gdemu_system.cpp" />
-    <ClCompile Include="gdemu_system_windows.cpp" />
-    <ClCompile Include="DummySerial.cpp" />
-    <ClCompile Include="SPI.cpp" />
-    <ClCompile Include="wiring.cpp" />
-    <ClCompile Include="WProgram.cpp" />
-    <ClCompile Include="Print.cpp" />
-    <ClCompile Include="WString.cpp" />
-    <ClCompile Include="GD.cpp" />
+    <ClInclude Include="soundbuffer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\gdemu\gdemu.vs2010.vcxproj">
+      <Project>{1d0ffc70-0620-496e-b00d-9ad798b3856d}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
