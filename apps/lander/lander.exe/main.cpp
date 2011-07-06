@@ -1,5 +1,5 @@
 #include <gdemu_emulator.h>
-#include <bootstrap.h>
+#include <gdbootstrap.h>
 
 int main(int, char* [])
 {

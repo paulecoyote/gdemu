@@ -82,12 +82,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bootstrap.cpp" />
-    <ClCompile Include="game.cpp" />
+    <ClCompile Include="gdbootstrap.cpp" />
+    <ClCompile Include="examplegame.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bootstrap.h" />
-    <ClInclude Include="game.h" />
+    <ClInclude Include="gdbootstrap.h" />
+    <ClInclude Include="examplegame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

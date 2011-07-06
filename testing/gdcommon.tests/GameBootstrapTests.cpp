@@ -1,7 +1,7 @@
 #include <UnitTest++.h>
 #include <SPI.h>
 #include <GD.h>
-#include <bootstrap.h>
+#include <gdbootstrap.h>
 
 SUITE(GameBootstrapTests)
 {

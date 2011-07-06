@@ -82,20 +82,20 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="bootstrap.cpp" />
-    <ClCompile Include="game.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="bootstrap.h" />
-    <ClInclude Include="game.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\COPYING" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\gdemu\gdemu.vs2010.vcxproj">
       <Project>{1d0ffc70-0620-496e-b00d-9ad798b3856d}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="gdbootstrap.cpp" />
+    <ClCompile Include="landergame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="gdbootstrap.h" />
+    <ClInclude Include="landergame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
