@@ -41,6 +41,8 @@ Versions only really make sense for this fork.
 
 * V0.1.0 Imported in to github from google code, added UnitTest++ as submodule.  Solution compiles with no warnings.
 * V0.1.1 Provided Visual Studio 2010 solutions.
+* V0.1.2 Fixed Visual Studio 2010 solutions and added Arduino projects.
+* V0.1.3 Added lander sprite, display the different ships.  Made logo appear on purpose for 3 secs (not emu).
 
 [0]: http://excamera.com/sphinx/gameduino/
 [1]: http://code.google.com/p/gdemu/source/checkout

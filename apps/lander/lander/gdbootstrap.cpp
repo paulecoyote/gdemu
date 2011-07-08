@@ -1,8 +1,10 @@
 // Arduino bootstrapping free functions for game
+#define DEBUG_SERIAL_MSGS 
 
 #include <SPI.h>
 #include <GD.h>
 #include "gdbootstrap.h"
+#include "reload_code.h"
 
 namespace BootstrapGame
 {
@@ -14,9 +16,15 @@ namespace BootstrapGame
 void setup()
 {
   Serial.begin(115200);
-
+  
+  // Prepare Gameduino (SPI, clearing ram, etc)
+  GD.begin();
+  
   // Wait until Gameduino responds properly.
   // Attempt writes until value takes, then return to known default value.
+#ifdef DEBUG_SERIAL_MSGS
+  Serial.println("Before wait for Gameduino loop");
+#endif
   do
   {
     GD.wr(RAM_SPRIMG, 0xFF);
@@ -24,12 +32,17 @@ void setup()
 
   GD.wr(RAM_SPRIMG, 0x00);
 
-  // Prepare Gameduino
+#ifdef DEBUG_SERIAL_MSGS
+  Serial.println("After wait for Gameduino loop");
+#endif
+
+  // Controlled show of logo
+  GD.microcode(reload_code, sizeof(reload_code));
+  delay(5000);
+  // Clear down again, this time no need to wait.
+  // (Gameduino is already initialised)
   GD.begin();
   GD.ascii();
-
-  // Show boot logo for a second
-  delay(1000);
 }
 
 // Main game loop.

@@ -100,6 +100,7 @@
   <ItemGroup>
     <ClCompile Include="GameBootstrapTests.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="podspritetests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\gdemu\gdemu.vs2010.vcxproj">
