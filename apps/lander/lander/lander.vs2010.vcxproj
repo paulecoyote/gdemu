@@ -96,6 +96,8 @@
   <ItemGroup>
     <ClInclude Include="gdbootstrap.h" />
     <ClInclude Include="landergame.h" />
+    <ClInclude Include="podsprite.h" />
+    <ClInclude Include="reload_code.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
