@@ -4,11 +4,13 @@
 
 #include "landergame.h"
 #include "podsprite.h"
+#include "gdbootstrap.h"
 
-namespace BootstrapGame 
+using namespace Sprite;
+
+namespace Lander
 {
-  // Entry point to game.
-  void Loop()
+  bool LanderGame::Play(void)
   {
 #ifdef DEBUG_SERIAL_MSGS
     Serial.println("Entered BootstrapGame::Loop");
@@ -36,5 +38,13 @@ namespace BootstrapGame
     }
 
     // Allowing exit from loop resets ends GD, then re-runs setup.
+    return false;
   }
+
+  LanderGame game;
 } // end namespace BootstrapGame
+
+void BootstrapGame::loop(void)
+{
+  while (Lander::game.Play());
+}
