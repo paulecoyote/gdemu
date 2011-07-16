@@ -43,6 +43,7 @@ Versions only really make sense for this fork.
 * V0.1.1 Provided Visual Studio 2010 solutions.
 * V0.1.2 Fixed Visual Studio 2010 solutions and added Arduino projects.
 * V0.1.3 Added lander sprite, display the different ships.  Made logo appear on purpose for 3 secs (not emu).
+* V0.1.4 Added some tests for setup (GD.begin).  Refactored game bootstrap code in to namespaces.  Added Lander class.
 
 [0]: http://excamera.com/sphinx/gameduino/
 [1]: http://code.google.com/p/gdemu/source/checkout

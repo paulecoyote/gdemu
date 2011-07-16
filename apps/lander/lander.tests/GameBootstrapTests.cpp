@@ -19,60 +19,65 @@ const uint16_t SPRITE_HIDDEN_HIGH_BYTE = highByte(400U);
 // * DataMode
 // * If Serial is initialised
 
-SUITE(GameBootstrapTests)
+struct SetupFixture
 {
-  TEST(WhenSetupCalled_BG_COLOR_IsZero)
+  SetupFixture() 
   {
+    originalEnableResetLogoDelay = BootstrapGame::enableResetLogoDelay;
+
     // Arrange
+    BootstrapGame::enableResetLogoDelay = false;
+     
     // Act
     setup();
+  };
 
+  ~SetupFixture()
+  {
+    // Restore
+    BootstrapGame::enableResetLogoDelay = originalEnableResetLogoDelay;
+  }
+
+  private: 
+    bool originalEnableResetLogoDelay;
+};
+
+
+SUITE(GameBootstrapTests)
+{
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_BG_COLOR_IsZero)
+  {
     // Assert
     uint16_t read = GD.rd16(BG_COLOR);
     CHECK_EQUAL((int)0, (int)read);
   }
 
-  TEST(WhenSetupCalled_IOMODE_IsZero)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_IOMODE_IsZero)
   {
-    // Arrange
-    // Act
-    setup();
-
     // Assert
     byte read = GD.rd(IOMODE);
     CHECK_EQUAL((int)0, (int)read);
   }
 
-  TEST(WhenSetupCalled_JK_MODE_IsZero)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_JK_MODE_IsZero)
   {
-    // Arrange
-    // Act
-    setup();
-
     // Assert
     byte read = GD.rd(JK_MODE);
     CHECK_EQUAL((int)0, (int)read);
   }
 
-  TEST(WhenSetupCalled_MODULATED_IsZero)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_MODULATED_IsZero)
   {
-    // Arrange
-    // Act
-    setup();
-
     // Assert
     byte read = GD.rd(MODULATED);
     CHECK_EQUAL((int)0, (int)read);
   }
 
-  TEST(WhenSetupCalled_Palette16aIsBlack)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_Palette16aIsBlack)
   {
     // Arrange
     int16_t i=0;
     byte transferred = 0;
-
-    // Act
-    setup();
 
     // Assert
     GD.__start(PALETTE16A);
@@ -87,93 +92,62 @@ SUITE(GameBootstrapTests)
     CHECK_EQUAL((int)EXPECTED_PALETTE16A_LENGTH, (int)i);
   }
 
-  TEST(WhenSetupCalled_SAMPLE_L_IsZero)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_SAMPLE_L_IsZero)
   {
-    // Arrange
-    // Act
-    setup();
-
     // Assert
     uint16_t read = GD.rd16(SAMPLE_L);
     CHECK_EQUAL((int)0, (int)read);
   }
 
-  TEST(WhenSetupCalled_SAMPLE_R_IsZero)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_SAMPLE_R_IsZero)
   {
-    // Arrange
-    // Act
-    setup();
-
     // Assert
     uint16_t read = GD.rd16(SAMPLE_R);
     CHECK_EQUAL((int)0, (int)read);
   }
 
-  TEST(WhenSetupCalled_SCREENSHOT_Y_IsZero)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_SCREENSHOT_Y_IsZero)
   {
-    // Arrange
-    // Act
-    setup();
-
     // Assert
     uint16_t read = GD.rd16(SCREENSHOT_Y);
     CHECK_EQUAL((int)0, (int)read);
   }
 
-  TEST(WhenSetupCalled_SCROLL_X_IsZero)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_SCROLL_X_IsZero)
   {
-    // Arrange
-    // Act
-    setup();
-
     // Assert
     uint16_t read = GD.rd16(SCROLL_X);
     CHECK_EQUAL((int)0, (int)read);
   }
   
-  TEST(WhenSetupCalled_SCROLL_Y_IsZero)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_SCROLL_Y_IsZero)
   {
-    // Arrange
-    // Act
-    setup();
-
     // Assert
     uint16_t read = GD.rd16(SCROLL_Y);
     CHECK_EQUAL((int)0, (int)read);
   }
 
-  TEST(WhenSetupCalled_SPR_DISABLE_IsZero)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_SPR_DISABLE_IsZero)
   {
-    // Arrange
-    // Act
-    setup();
-
     // Assert
     byte read = GD.rd(SPR_DISABLE);
     CHECK_EQUAL((int)0, (int)read);
   }
 
-  TEST(WhenSetupCalled_SPR_PAGE_IsZero)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_SPR_PAGE_IsZero)
   {
-    // Arrange
-    // Act
-    setup();
-
     // Assert
     byte read = GD.rd(SPR_PAGE);
     CHECK_EQUAL((int)0, (int)read);
   }
 
-  TEST(WhenSetupCalled_SpriteDataIsHidden)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_SpriteDataIsHidden)
   {
     // Arrange
     int16_t sprite;
     uint16_t transferred;
     uint16_t low_byte, high_byte;
     
-    // Act
-    setup();
-
     // Assert
     for (sprite=0; sprite < 512; ++sprite)  {
       // For every sprite, check that it has been hidden
@@ -191,13 +165,9 @@ SUITE(GameBootstrapTests)
     CHECK_EQUAL((int)EXPECTED_SPRITES, (int)sprite);
   }
 
-  TEST(WhenSetupCalled_SpritePalletesAreBlack)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_SpritePalletesAreBlack)
   {
-    // Arrange
-    int16_t i=0;
-
-    // Act
-    setup();
+    int i;
 
     // Assert
     GD.__start(RAM_SPRPAL);
@@ -211,36 +181,25 @@ SUITE(GameBootstrapTests)
     CHECK_EQUAL((int)EXPECTED_SPRPAL_LENGTH, (int)i);
   }
 
-  TEST(WhenSetupCalled_SS_PIN_IsHIGH)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_SS_PIN_IsHIGH)
   {
-    // Arrange
-    // Act
-    setup();
-
     // Assert
     uint8_t pin = digitalRead(SS_PIN);
     CHECK_EQUAL((int)HIGH, (int)pin);
   }
 
-  TEST(WhenSetupCalled_UNMODULATED_IsZero)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_UNMODULATED_IsZero)
   {
-    // Arrange
-    // Act
-    setup();
-
     // Assert
     byte read = GD.rd(UNMODULATED);
     CHECK_EQUAL((int)0, (int)read);
   }
 
-  TEST(WhenSetupCalled_VoicesAreSilent)
+  TEST_FIXTURE(SetupFixture, WhenSetupCalled_VoicesAreSilent)
   {
     // Arrange
     int16_t i=0;
     byte transferred = 0;
-
-    // Act
-    setup();
 
     // Assert
     GD.__start(VOICES);

@@ -44,7 +44,7 @@ namespace Lander
   LanderGame game;
 } // end namespace BootstrapGame
 
-void BootstrapGame::Loop(void)
+void BootstrapGame::loop(void)
 {
   while (Lander::game.Play());
 }

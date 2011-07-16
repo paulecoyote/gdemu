@@ -10,5 +10,6 @@ void loop();
 namespace BootstrapGame
 {
   // Decalre game blocking game loop, exiting restarts.
-  void Loop(void);
+  void loop(void);
+  extern bool enableResetLogoDelay;
 }
