@@ -7,3 +7,8 @@ void loop();
 //------------------------------------
 
 // TODO: Declare bootstrap var struct for testability
+namespace BootstrapGame
+{
+  // Decalre game blocking game loop, exiting restarts.
+  void Loop(void);
+}
